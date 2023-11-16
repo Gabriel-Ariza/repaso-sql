@@ -14,13 +14,11 @@ El comando para crear una base de datos es:
 CREATE DATABASE nombre_de_la_base_de_datos;
 ```
 
-
 ### Borrar bases de datos
 
 ```sql
 DROP DATABASE nombre_de_la_base_de_datos;
 ```
-
 
 ### Crear tablas
 
@@ -32,13 +30,11 @@ CREATE TABLE usuarios (
 );
 ```
 
-
 ### Borrar tablas
 
 ```sql
 DROP TABLE nombre_de_la_tabla;
 ```
-
 
 ### Crear llaves primarias
 
@@ -48,8 +44,7 @@ ADD PRIMARY KEY (nombre_de_la_columna);
 
 ```
 
-
-###Crear llaves foráneas
+### Crear llaves foráneas
 
 ```sql
 ALTER TABLE nombre_de_la_tabla
@@ -57,14 +52,12 @@ ADD CONSTRAINT nombre_de_la_llave_foranea
 FOREIGN KEY (nombre_de_la_columna) REFERENCES otra_tabla (columna_referenciada);
 ```
 
-
 ### Insertar datos
 
 ```sql
 INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3)
 VALUES (valor1, valor2, valor3);
 ```
-
 
 ### Modificar datos
 
@@ -74,13 +67,14 @@ SET columna = nuevo_valor WHERE condicion;
 
 ```
 
-
 ### Eliminar datos
 
 ```sql
 DELETE FROM nombre_de_la_tabla WHERE condicion;
 ```
 
+<br>
+<br>
 
 ## Instrucciones de Consulta de datos 📊
 
