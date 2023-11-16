@@ -4,7 +4,7 @@
 
 SQL (Structured Query Language) es un lenguaje estándar para administrar bases de datos relacionales. Se utiliza para realizar consultas, actualizaciones, inserciones, y más, en bases de datos.
 
-## Comandos SQL y Ejemplos
+## Comandos SQL y Ejemplos 🎯
 
 ### Crear bases de datos
 
@@ -112,7 +112,7 @@ WHERE condicion;
 La estructura de una tabla se puede revisar utilizando el comando DESCRIBE o SHOW COLUMNS FROM. Por ejemplo:
 
 ```sql
-DESCRIBE nombre_de_la_tabla;
+SHOW COLUMNS FROM nombre_de_la_tabla;
 ```
 
 ### Dar un alias a un campo
@@ -130,3 +130,32 @@ Para dar un alias a una tabla en una consulta, se utiliza la palabra clave AS de
 ```sql
 SELECT t.columna1 FROM nombre_de_la_tabla AS t;
 ```
+
+<br>
+<br>
+
+## Instrucciones para utilizar funciones en cadena ⛓️
+
+### CONCAT
+### SUBSTRING
+### REPLACE
+<br>
+<br>
+
+## Instrucciones para utilizar funciones numéricas 📠
+
+### SUM
+### COUNT
+### MAX
+### MIN
+### AVG
+<br>
+<br>
+
+## Instrucciones para utilizar funciones de fechas 📆
+
+### DATEDIFF
+### DAY
+### MONTH
+### YEAR
+### DATE_FORMAT
