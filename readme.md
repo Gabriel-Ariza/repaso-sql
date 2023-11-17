@@ -11,13 +11,13 @@ SQL (Structured Query Language) es un lenguaje estándar para administrar bases 
 El comando para crear una base de datos es:
 
 ```sql
-CREATE DATABASE nombre_de_la_base_de_datos;
+CREATE DATABASE registros;
 ```
 
 ### Borrar bases de datos
 
 ```sql
-DROP DATABASE nombre_de_la_base_de_datos;
+DROP DATABASE registros;
 ```
 
 ### Crear tablas
@@ -33,44 +33,44 @@ CREATE TABLE usuarios (
 ### Borrar tablas
 
 ```sql
-DROP TABLE nombre_de_la_tabla;
+DROP TABLE usuarios;
 ```
 
 ### Crear llaves primarias
 
 ```sql
-ALTER TABLE nombre_de_la_tabla
-ADD PRIMARY KEY (nombre_de_la_columna);
+ALTER TABLE usuarios
+ADD PRIMARY KEY (id);
 
 ```
 
 ### Crear llaves foráneas
 
 ```sql
-ALTER TABLE nombre_de_la_tabla
-ADD CONSTRAINT nombre_de_la_llave_foranea
-FOREIGN KEY (nombre_de_la_columna) REFERENCES otra_tabla (columna_referenciada);
+ALTER TABLE pedidos
+ADD CONSTRAINT usuario_id
+FOREIGN KEY (usuario_id) REFERENCES usuarios (id);
 ```
 
 ### Insertar datos
 
 ```sql
-INSERT INTO nombre_de_la_tabla (columna1, columna2, columna3)
-VALUES (valor1, valor2, valor3);
+INSERT INTO usuarios (nombre, email)
+VALUES ('pepe', 'soypepe@gmail.com');
 ```
 
 ### Modificar datos
 
 ```sql
-UPDATE nombre_de_la_tabla
-SET columna = nuevo_valor WHERE condicion;
+UPDATE usuarios
+SET nombre = 'yanosoypepe' WHERE id = 1;
 
 ```
 
 ### Eliminar datos
 
 ```sql
-DELETE FROM nombre_de_la_tabla WHERE condicion;
+DELETE FROM usuarios WHERE id = 1;
 ```
 
 <br>
@@ -80,10 +80,8 @@ DELETE FROM nombre_de_la_tabla WHERE condicion;
 
 ### Consultar datos de una sola tabla
 
-Para consultar datos de una sola tabla, se utiliza la instrucción `SELECT`. Por ejemplo:
-
 ```sql
-SELECT columna1, columna2 FROM nombre_de_la_tabla;
+SELECT nombre, email FROM usuarios;
 ```
 
 
@@ -92,8 +90,8 @@ SELECT columna1, columna2 FROM nombre_de_la_tabla;
 Para consultar datos en múltiples tablas, se emplea la cláusula JOIN. Esto permite combinar datos de tablas relacionadas. Por ejemplo:
 
 ```sql
-SELECT t1.columna1, t2.columna2 FROM tabla1 AS t1
-JOIN tabla2 AS t2 ON t1.id = t2.tabla1_id;
+SELECT us.id, us.email FROM usuarios AS us
+JOIN registros AS ta ON us.id = ta.id;
 ```
 
 
@@ -102,9 +100,9 @@ JOIN tabla2 AS t2 ON t1.id = t2.tabla1_id;
 Se puede utilizar la instrucción CREATE TABLE junto con SELECT para crear una tabla a partir del resultado de una consulta. Por ejemplo:
 
 ```sql
-CREATE TABLE nueva_tabla AS
-SELECT columna1, columna2 FROM tabla_existente
-WHERE condicion;
+CREATE TABLE nuevo_registro AS
+SELECT nombre, email, saldo FROM usuarios
+WHERE saldo > 100;
 ```
 
 ### Revisar la estructura de una tabla
@@ -112,7 +110,7 @@ WHERE condicion;
 La estructura de una tabla se puede revisar utilizando el comando DESCRIBE o SHOW COLUMNS FROM. Por ejemplo:
 
 ```sql
-SHOW COLUMNS FROM nombre_de_la_tabla;
+SHOW COLUMNS FROM usuarios;
 ```
 
 ### Dar un alias a un campo
@@ -120,7 +118,7 @@ SHOW COLUMNS FROM nombre_de_la_tabla;
 Para dar un alias a un campo en una consulta, se usa la palabra clave AS. Por ejemplo:
 
 ```sql
-SELECT columna1 AS alias_columna FROM nombre_de_la_tabla;
+SELECT email AS this_correos FROM usuarios;
 ```
 
 ### Dar un alias a una tabla
@@ -128,7 +126,7 @@ SELECT columna1 AS alias_columna FROM nombre_de_la_tabla;
 Para dar un alias a una tabla en una consulta, se utiliza la palabra clave AS después del nombre de la tabla. Por ejemplo:
 
 ```sql
-SELECT t.columna1 FROM nombre_de_la_tabla AS t;
+SELECT t.usuarios FROM tablas AS t;
 ```
 
 <br>
@@ -137,25 +135,149 @@ SELECT t.columna1 FROM nombre_de_la_tabla AS t;
 ## Instrucciones para utilizar funciones en cadena ⛓️
 
 ### CONCAT
+El comando CONCAT se usa para concatenar dos o más cadenas en una sola:
+
+```sql
+    SELECT CONCAT(columna1, ' ', columna2) AS Concatenado
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT CONCAT('Hola', ' ', 'Mundo') AS Concatenado;
+```
+
 ### SUBSTRING
+SUBSTRING se emplea para extraer una parte específica de una cadena:
+
+```sql
+    SELECT SUBSTRING(columna, inicio, longitud) AS Subcadena
+    FROM tabla;
+```
+
 ### REPLACE
+Para reemplazar una cadena, se utiliza la palabra reservada REPLACE:
+
+```sql
+    SELECT REPLACE(columna, 'valor_a_reemplazar', 'nuevo_valor') AS Reemplazado
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+SELECT REPLACE('Hola Mundo', 'Mundo', 'Amigo') AS Reemplazado;
+```
+
 <br>
 <br>
 
 ## Instrucciones para utilizar funciones numéricas 📠
 
 ### SUM
+
+```sql
+    SELECT SUM(columna) AS Total
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT SUM(Precio) AS Total FROM Productos;
+```
 ### COUNT
+COUNT cuenta el número de filas que cumplen con una condición especificada:
+
+```sql
+    SELECT COUNT(columna) AS Conteo
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT COUNT(*) AS TotalEmpleados FROM Empleados;
+```
 ### MAX
+MAX devuelve el valor máximo en una columna:
+
+```sql
+    SELECT MAX(columna) AS Maximo
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT MAX(Precio) AS PrecioMaximo FROM Productos;
+```
 ### MIN
+MIN devuelve el valor mínimo en una columna:
+
+```sql
+    SELECT MIN(columna) AS Minimo
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT MIN(Precio) AS PrecioMinimo FROM Productos;
+```
 ### AVG
+AVG se utiliza para calcular el promedio de valores en una columna numérica:
+
+```sql
+    SELECT AVG(columna) AS Promedio
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT AVG(Edad) AS EdadPromedio FROM Empleados;
+```
+
 <br>
 <br>
 
 ## Instrucciones para utilizar funciones de fechas 📆
 
 ### DATEDIFF
+DATEDIFF se usa para calcular la diferencia en días entre dos fechas:
+
+```sql
+    SELECT DATEDIFF(fecha1, fecha2) AS Diferencia
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+
+```
 ### DAY
+DAY extrae el día de una fecha:
+
+```sql
+    SELECT DAY(fecha) AS Dia
+    FROM tabla;
+```
+Ejemplo:
+
+```sql
+    SELECT DATEDIFF('2023-11-16', '2023-11-10') AS DiferenciaDias;
+```
 ### MONTH
+MONTH extrae el mes de una fecha. Ejemplo: 
+```sql
+MONTH('2023-11-16') devuelve 11, representando noviembre.
+```
+
+
 ### YEAR
+Convierte una fecha en el año correspondiente. Ejemplo:
+
+```sql
+YEAR('2023-11-16') // devuelve 2023.
+```
+
 ### DATE_FORMAT
+DATE_FORMAT: Transforma una fecha al formato deseado. Ejemplo: 
+```sql
+DATE_FORMAT('2023-11-16', '%d/%m/%Y') // muestra la fecha como 16/11/2023.
+```
